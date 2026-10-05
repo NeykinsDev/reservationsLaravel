@@ -92,6 +92,18 @@ class ArtistController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        /*
+        On peut aussi utiliser la méthode destroy() pour aller + vite, 
+        mais on ne peut pas vérifier si l'artiste existe avant de le supprimer
+        exemple :
+        Artist::destroy($id);
+        return redirect()->route('artist.index');
+        */
+        $artist = Artist::find($id);
+        
+        if ($artist)
+            $artist->delete();
+
+        return redirect()->route('artist.index');
     }
 }
